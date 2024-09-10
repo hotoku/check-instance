@@ -25,11 +25,12 @@ send_message(){
         msg="error: invalid destination. original message: ${msg}"
         webhook_url=${logs_url}
     fi
-    local tmp='{"text": "check-connection: __MESSAGE__"}'
+    local tmp='{"text": "check-instance: __MESSAGE__"}'
     local payload=$(echo ${tmp} | sed -e "s/__MESSAGE__/${msg}/")    
     curl -X POST -H "Content-type: application/json" -d "${payload}" ${webhook_url}
 }
 
+send_message "start checking" logs
 list_instances | while read instance_id; do
   if [[ ${instance_id} =  "i-0f488af9d15dd891c" ]]; then # データ収集用のインスタンス
     echo "skip"
