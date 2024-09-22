@@ -34,6 +34,8 @@ send_message "start checking" logs
 list_instances | while read instance_id; do
   if [[ ${instance_id} =  "i-0f488af9d15dd891c" ]]; then # データ収集用のインスタンス
     echo "skip"
+  elif [[ ${instance_id} = "i-09c7895d018cd7908" ]]; then # GMO_Data
+    echo "skip"
   else
     send_message "<@hotoku> ${instance_id} is running" warns
   fi
